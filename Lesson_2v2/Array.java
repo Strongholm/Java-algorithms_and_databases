@@ -26,22 +26,6 @@ public class Array<T> implements Iterable<T> {
         return size;
     }
 
-    public T get(int index) {
-        checkCollision(index);
-        return (T) list[index];
-    }
-
-    public void set(int index, T item) {
-        checkCollision(index);
-        list[index] = item;
-    }
-
-    private void checkCollision(int index) {
-        if (index < 0 || index > size - 1) {
-            throw new IndexOutOfBoundsException("Не правильное значение");
-        }
-    }
-
     public void add(T item) {
         if (size == list.length) {
             resize(2 * list.length);
