@@ -30,90 +30,104 @@ public class Main {
 // 2. Познакомиться с головоломкой Ханойские башни.
 //    Реализовать рекурсивный и циклический алгоритмы решения этой головоломки.
 
-    public void towerHanoi(int count, Deque<Integer> stemA, Deque<Integer> stemB, Deque<Integer> stemC) {
+    public void towerHanoiCycle(int count, Deque<Integer> stemA, Deque<Integer> stemB, Deque<Integer> stemC) {
 
         if (count < 0) throw new ArithmeticException("The degree cannot be a negative number.");
 
         for (int i = count; i > 0; i--) {
             stemA.push(i);
         }
-//
-//        while (stemC.size() != count) {
-//            try {
-//                if (count % 2 == 0) {
-//                    if (stemA.peek() < stemB.peek()) {
-//                        stemB.push(stemA.pop());
-//                    } else {
-//                        stemA.push(stemB.pop());
-//                    }
-//                }
-//                if (count % 2 == 1) {
-//                    if (stemA.peek() < stemC.peek()) {
-//                        stemC.push(stemA.pop());
-//                    } else {
-//                        stemA.push(stemC.pop());
-//                    }
-//                }
-//            } catch (NullPointerException exp) {
-//                try {
-//                    if (count % 2 == 0 && stemB.isEmpty()) {
-//                        stemB.push(stemA.pop());
-//                    } else if (count % 2 == 1 && stemC.isEmpty()) {
-//                        stemC.push(stemA.pop());
-//                    } else if (count % 2 == 0 && stemA.isEmpty()) {
-//                        stemA.push(stemB.pop());
-//                    } else if (count % 2 == 1 && stemA.isEmpty()) {
-//                        stemA.push(stemC.pop());
-//                    }
-//                } catch (NoSuchElementException e) {
-//                    break;
-//                }
-//            }
-//
-//            try {
-//                if (count % 2 == 0) {
-//                    if (stemA.peek() < stemC.peek()) {
-//                        stemC.push(stemA.pop());
-//                    } else {
-//                        stemA.push(stemC.pop());
-//                    }
-//                }
-//                if (count % 2 == 1) {
-//                    if (stemA.peek() < stemB.peek()) {
-//                        stemB.push(stemA.pop());
-//                    } else {
-//                        stemA.push(stemB.pop());
-//                    }
-//                }
-//            } catch (NullPointerException exp) {
-//                try {
-//                    if (count % 2 == 1 && stemB.isEmpty()) {
-//                        stemB.push(stemA.pop());
-//                    } else if (count % 2 == 0 && stemC.isEmpty()) {
-//                        stemC.push(stemA.pop());
-//                    } else if (count % 2 == 1 && stemA.isEmpty()) {
-//                        stemA.push(stemB.pop());
-//                    } else if (count % 2 == 0 && stemA.isEmpty()) {
-//                        stemA.push(stemC.pop());
-//                    }
-//                } catch (NoSuchElementException e) {
-//                    break;
-//                }
-//            }
-//
-//            try {
-//                if (stemB.peek() < stemC.peek()) {
-//                    stemC.push(stemB.pop());
-//                } else {
-//                    stemB.push(stemC.pop());
-//                }
-//            } catch (NullPointerException exp) {
-//                if (stemC.isEmpty()) {
-//                    stemC.push(stemB.pop());
-//                } else if (stemB.isEmpty()) {
-//                    stemB.push(stemC.pop());
-//                }
-//            }
-//        }
+
+        while (stemC.size() != count) {
+            try {
+                if (count % 2 == 0) {
+                    if (stemA.peek() < stemB.peek()) {
+                        stemB.push(stemA.pop());
+                    } else {
+                        stemA.push(stemB.pop());
+                    }
+                }
+                if (count % 2 == 1) {
+                    if (stemA.peek() < stemC.peek()) {
+                        stemC.push(stemA.pop());
+                    } else {
+                        stemA.push(stemC.pop());
+                    }
+                }
+            } catch (NullPointerException exp) {
+                try {
+                    if (count % 2 == 0 && stemB.isEmpty()) {
+                        stemB.push(stemA.pop());
+                    } else if (count % 2 == 1 && stemC.isEmpty()) {
+                        stemC.push(stemA.pop());
+                    } else if (count % 2 == 0 && stemA.isEmpty()) {
+                        stemA.push(stemB.pop());
+                    } else if (count % 2 == 1 && stemA.isEmpty()) {
+                        stemA.push(stemC.pop());
+                    }
+                } catch (NoSuchElementException e) {
+                    break;
+                }
+            }
+
+            try {
+                if (count % 2 == 0) {
+                    if (stemA.peek() < stemC.peek()) {
+                        stemC.push(stemA.pop());
+                    } else {
+                        stemA.push(stemC.pop());
+                    }
+                }
+                if (count % 2 == 1) {
+                    if (stemA.peek() < stemB.peek()) {
+                        stemB.push(stemA.pop());
+                    } else {
+                        stemA.push(stemB.pop());
+                    }
+                }
+            } catch (NullPointerException exp) {
+                try {
+                    if (count % 2 == 1 && stemB.isEmpty()) {
+                        stemB.push(stemA.pop());
+                    } else if (count % 2 == 0 && stemC.isEmpty()) {
+                        stemC.push(stemA.pop());
+                    } else if (count % 2 == 1 && stemA.isEmpty()) {
+                        stemA.push(stemB.pop());
+                    } else if (count % 2 == 0 && stemA.isEmpty()) {
+                        stemA.push(stemC.pop());
+                    }
+                } catch (NoSuchElementException e) {
+                    break;
+                }
+            }
+
+            try {
+                if (stemB.peek() < stemC.peek()) {
+                    stemC.push(stemB.pop());
+                } else {
+                    stemB.push(stemC.pop());
+                }
+            } catch (NullPointerException exp) {
+                if (stemC.isEmpty()) {
+                    stemC.push(stemB.pop());
+                } else if (stemB.isEmpty()) {
+                    stemB.push(stemC.pop());
+                }
+            }
+        }
+    }
+
+    public static void towerHanoiRecursio( int n, int from, int to, int additional){
+        if (n < 0) throw new ArithmeticException("The degree cannot be a negative number.");
+        if (n == 0) {
+            return;
+        }
+
+        towerHanoiRecursio(n - 1, from, additional, to );
+
+        System.out.println( "№" + n + " From the rod  " + from + " On rod " + to );
+
+        towerHanoiRecursio(n - 1, additional, to, from );
+
     }
 }
